@@ -57,3 +57,40 @@ a { color: inherit; }
   color: var(--color-bg);
   z-index: 100;
 }
+
+/* ---------- reveal on scroll ----------
+   Hidden state only exists when JS is running (html.js) and motion is allowed. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-reveal]:not([data-reveal='words']):not([data-revealed]) {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  html.js [data-reveal]:not([data-reveal='words'])[data-revealed] {
+    animation: rise .7s var(--ease-out) both;
+  }
+  html.js [data-reveal='words'] .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(.4em) rotate(2deg);
+  }
+  html.js [data-reveal='words'][data-revealed] .word {
+    animation: word-on .6s var(--ease-out) both;
+    animation-delay: calc(var(--i) * 70ms);
+  }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes word-on {
+  from { opacity: 0; transform: translateY(.4em) rotate(2deg); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---------- nav auto-hide ---------- */
+[data-nav] { transition: transform .35s var(--ease-out); }
+[data-nav][data-hidden] { transform: translateY(-100%); }
+@media (prefers-reduced-motion: reduce) {
+  [data-nav] { transition: none; }
+}

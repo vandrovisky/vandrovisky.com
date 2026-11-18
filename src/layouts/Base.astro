@@ -41,5 +41,12 @@ const alternates = Astro.props.alternates ?? {
     </main>
     <Footer lang={lang} />
     <Cursor />
+    <script>
+      import { initReveal } from '../scripts/motion/reveal';
+      import { initNavHide } from '../scripts/motion/nav';
+      initReveal();
+      const nav = document.querySelector<HTMLElement>('[data-nav]');
+      if (nav) initNavHide(nav);
+    </script>
   </body>
 </html>
