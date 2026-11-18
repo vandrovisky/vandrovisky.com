@@ -1,0 +1,88 @@
+name: CI / Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '0 6 * * 1' # every Monday 06:00 UTC: rebuild with a fresh card pool
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      # cards.json is generated (prebuild) and astro check type-checks its import; use the committed seed here.
+      - run: npm run prebuild
+        env:
+          CARDS_OFFLINE: '1'
+      - run: npm run check
+      - run: npm test
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: test-results/
+          retention-days: 7
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    # Forks don't get secrets: skip deploy for their PRs.
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run build # prebuild fetches live cards, falls back to the seed per game
+
+      - name: Deploy production (workers.dev — custom domain is attached at launch)
+        if: github.event_name != 'pull_request'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
+
+      - name: Upload preview version
+        id: preview
+        if: github.event_name == 'pull_request'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: versions upload --preview-alias pr-${{ github.event.number }} --message "PR #${{ github.event.number }}"
+
+      - name: Comment preview URL
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        env:
+          OUTPUT: ${{ steps.preview.outputs.command-output }}
+        with:
+          script: |
+            const urls = [...new Set(process.env.OUTPUT.match(/https:\/\/[^\s]+workers\.dev/g) ?? [])];
+            const body = urls.length
+              ? `Preview:\n${urls.map((u) => `- ${u}`).join('\n')}`
+              : 'Preview uploaded, but no URL was found in the wrangler output.';
+            await github.rest.issues.createComment({ ...context.repo, issue_number: context.issue.number, body });
