@@ -1,0 +1,78 @@
+---
+import { ROUTES } from '../i18n/paths';
+import { caseSlug, type Case } from '../i18n/content';
+
+interface Props { entry: Case; index: number }
+const { entry, index } = Astro.props;
+const { title, summary, stack, year, lang } = entry.data;
+const href = `${ROUTES.work[lang]}${caseSlug(entry)}/`;
+---
+
+<li class="case-row" data-case data-reveal>
+  <a href={href} class="case-row__link">
+    <span class="case-row__index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+    <span class="case-row__body">
+      <h3 class="case-row__title">{title}</h3>
+      <span class="case-row__summary">{summary}</span>
+      <span class="case-row__meta">
+        <span>{stack.slice(0, 4).join(' · ')}</span>
+        <span>{year}</span>
+      </span>
+    </span>
+    <span class="case-row__arrow" aria-hidden="true">→</span>
+  </a>
+</li>
+
+<style>
+  .case-row { border-bottom: 1px solid var(--color-line); }
+  .case-row__link {
+    display: grid;
+    grid-template-columns: 3.5rem minmax(0, 1fr) 2.5rem;
+    gap: var(--space-4);
+    align-items: start;
+    padding: var(--space-5) var(--space-3);
+    text-decoration: none;
+    border-radius: 12px;
+    transition: background-color .35s var(--ease-out);
+  }
+  .case-row__index {
+    font-family: var(--font-mono);
+    font-size: .9rem;
+    color: var(--color-accent);
+    padding-top: .55em;
+  }
+  .case-row__body { display: grid; gap: var(--space-2); min-width: 0; }
+  .case-row__title {
+    font-size: clamp(1.5rem, 3.6vw, 2.4rem);
+    transition: transform .45s var(--ease-out);
+  }
+  .case-row__summary { color: var(--color-muted); max-width: var(--measure); }
+  .case-row__meta {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
+    font-family: var(--font-mono);
+    font-size: .8rem;
+    color: var(--color-muted);
+  }
+  .case-row__arrow {
+    font-size: 1.75rem;
+    padding-top: .2em;
+    justify-self: end;
+    transition: transform .45s var(--ease-out), color .3s;
+  }
+  .case-row__link:hover, .case-row__link:focus-visible {
+    background: color-mix(in srgb, var(--color-ink) 6%, transparent);
+  }
+  .case-row__link:hover .case-row__title { transform: translateX(.35rem); }
+  .case-row__link:hover .case-row__arrow { transform: translateX(.5rem); color: var(--color-accent); }
+
+  @media (max-width: 600px) {
+    .case-row__link { grid-template-columns: 2.25rem minmax(0, 1fr); padding-inline: 0; }
+    .case-row__arrow { display: none; }
+    .case-row__meta { flex-direction: column; gap: var(--space-1); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .case-row__title, .case-row__arrow { transition: none; }
+  }
+</style>

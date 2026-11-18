@@ -1,5 +1,5 @@
 ---
-import CaseCard from '../components/CaseCard.astro';
+import CaseRow from '../components/CaseRow.astro';
 import { getCases } from '../i18n/content';
 import { SECTIONS } from '../i18n/paths';
 import type { Lang } from '../i18n/ui';
@@ -13,18 +13,14 @@ const copy = {
 }[lang];
 ---
 
-<section id={SECTIONS.cases[lang]} data-alt={SECTIONS.cases[lang === 'en' ? 'pt' : 'en']} class="section" aria-labelledby="cases-title">
+<section data-mood="alt" id={SECTIONS.cases[lang]} data-alt={SECTIONS.cases[lang === 'en' ? 'pt' : 'en']} class="section" aria-labelledby="cases-title">
   <h2 id="cases-title" class="section__title" data-cursor-anchor data-reveal="words">{copy.title}</h2>
   <p class="section__lead" data-reveal>{copy.lead}</p>
-  <div class="case-grid">
-    {cases.map((entry) => <CaseCard entry={entry} />)}
-  </div>
+  <ol class="case-list">
+    {cases.map((entry, i) => <CaseRow entry={entry} index={i} />)}
+  </ol>
 </section>
 
 <style>
-  .case-grid {
-    display: grid;
-    gap: var(--space-6) var(--space-5);
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
-  }
+  .case-list { list-style: none; padding: 0; border-top: 1px solid var(--color-line); }
 </style>

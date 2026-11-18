@@ -8,6 +8,8 @@ export function activeSection(sections: { id: string; top: number }[], line: num
 /** Highlights the visible section in the nav and keeps the language switch pointing at it. */
 export function initSectionNav(): void {
   const links = [...document.querySelectorAll<HTMLAnchorElement>('[data-section-link]')];
+  const html = document.documentElement;
+  html.dataset.mood = 'base';
   if (!links.length) return;
   const sections = [...document.querySelectorAll<HTMLElement>('main section[id]')];
   const langSwitch = document.querySelector<HTMLAnchorElement>('.lang-switch');
@@ -24,6 +26,7 @@ export function initSectionNav(): void {
       if (a.dataset.sectionLink === id) a.setAttribute('aria-current', 'location');
       else a.removeAttribute('aria-current');
     }
+    html.dataset.mood = sections.find((el) => el.id === id)?.dataset.mood ?? 'base';
     if (langSwitch) {
       const alt = sections.find((el) => el.id === id)?.dataset.alt;
       langSwitch.setAttribute('href', alt ? `${switchBase}#${alt}` : switchBase);

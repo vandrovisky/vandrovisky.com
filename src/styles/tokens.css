@@ -33,3 +33,19 @@
     --color-line: #2c2a33;
   }
 }
+
+/* Alternate "mood" used by some sections (cases, contact): the page inverts while they are on screen. */
+html[data-mood='alt'] {
+  --color-bg: #16151a;
+  --color-ink: #f4f1ea;
+  --color-muted: #a8a4b0;
+  --color-line: #34313c;
+}
+@media (prefers-color-scheme: dark) {
+  html[data-mood='alt'] {
+    --color-bg: #f4f1ea;
+    --color-ink: #16151a;
+    --color-muted: #55525e;
+    --color-line: #d9d4c7;
+  }
+}

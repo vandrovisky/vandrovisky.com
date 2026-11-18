@@ -125,11 +125,39 @@ a { color: inherit; }
 
 /* ---------- single page sections ---------- */
 .section {
+  position: relative;
   display: grid;
   gap: var(--space-5);
   padding-block: var(--space-7);
-  border-top: 1px solid var(--color-line);
   scroll-margin-top: 4.5rem; /* sticky header */
+  view-timeline-name: --section;
+}
+/* divider: drawn left → right as the section enters (scroll-driven, no JS) */
+.section::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: var(--color-line);
+  transform-origin: left;
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .section::before {
+      animation: draw-line linear both;
+      animation-timeline: --section;
+      animation-range: entry 0% entry 70%;
+    }
+  }
+}
+@keyframes draw-line {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* mood change between sections (html[data-mood] is set by scripts/sections.ts) */
+@media (prefers-reduced-motion: no-preference) {
+  body, .site-header { transition: background-color .7s var(--ease-out), color .7s var(--ease-out); }
 }
 .section__title { font-size: clamp(2.25rem, 6vw, 4.5rem); }
 .section__lead { font-size: 1.2rem; max-width: var(--measure); color: var(--color-muted); }
