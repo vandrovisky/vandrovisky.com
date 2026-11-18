@@ -32,6 +32,7 @@ const alternates = Astro.props.alternates ?? {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script is:inline>document.documentElement.classList.add('js');</script>
+    <style is:inline>@media (prefers-reduced-motion: no-preference) { @view-transition { navigation: auto; } }</style>
     <script is:inline set:html={originScript} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <Seo lang={lang} title={title} description={description} alternates={alternates} ogImage={ogImage} />

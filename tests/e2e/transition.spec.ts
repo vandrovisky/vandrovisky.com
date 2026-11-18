@@ -28,4 +28,6 @@ test('view transition css is present', async ({ request }) => {
   const cssLinks = [...html.matchAll(/href="(\/_astro\/[^"]+\.css)"/g)].map((m) => m[1]);
   const css = (await Promise.all(cssLinks.map(async (l) => (await request.get(l)).text()))).join('') + html;
   expect(css).toMatch(/@view-transition/);
+  // opt-in must be inline in <head>: an external stylesheet can be applied after Chromium checks it
+  expect(html).toMatch(/<style>[^<]*@view-transition/);
 });

@@ -55,3 +55,14 @@ test('unknown page is a 404 with a way home', async ({ page }) => {
   expect(res?.status()).toBe(404);
   await expect(page.locator('main a[href="/"]')).toBeVisible();
 });
+
+for (const width of [360, 1280]) {
+  test(`no horizontal overflow at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 800 });
+    for (const path of ['/', '/work/', '/about/', '/hobbies/', '/contact/']) {
+      await page.goto(path);
+      const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+      expect(overflow, path).toBeLessThanOrEqual(0);
+    }
+  });
+}

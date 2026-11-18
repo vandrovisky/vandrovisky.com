@@ -1,0 +1,68 @@
+---
+import type { Card } from '../../scripts/cards/types';
+
+interface Props { card: Card }
+const { card } = Astro.props;
+---
+
+<div class="holo" data-game={card.game} tabindex="0">
+  <div class="holo__inner">
+    <img class="holo__img" src={card.image} alt={`${card.name} — ${card.set}`} width="480" height="670" loading="lazy" decoding="async" />
+    <div class="holo__shine" aria-hidden="true"></div>
+    <div class="holo__glare" aria-hidden="true"></div>
+  </div>
+</div>
+
+<style is:global>
+  .holo {
+    --px: 50%; --py: 50%; --rx: 0deg; --ry: 0deg; --hyp: 0;
+    perspective: 800px;
+    touch-action: pan-y;
+    border-radius: 4.5% / 3.5%;
+    outline-offset: 6px;
+  }
+  .holo__inner {
+    position: relative;
+    aspect-ratio: 63 / 88;
+    border-radius: inherit;
+    overflow: hidden;
+    transform: rotateX(var(--rx)) rotateY(var(--ry));
+    transition: transform .5s var(--ease-out), box-shadow .5s var(--ease-out);
+    box-shadow: 0 10px 30px -12px rgb(0 0 0 / .45);
+    will-change: transform;
+  }
+  .holo[data-active] .holo__inner {
+    transition: transform .08s linear;
+    box-shadow: 0 24px 50px -16px rgb(0 0 0 / .55);
+  }
+  .holo__img { width: 100%; height: 100%; object-fit: cover; }
+  .holo__shine, .holo__glare {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+  }
+  /* rainbow foil that slides with the pointer */
+  .holo__shine {
+    background:
+      repeating-linear-gradient(110deg,
+        hsl(2 100% 70%) 0%, hsl(53 100% 69%) 6%, hsl(93 100% 69%) 12%,
+        hsl(176 100% 70%) 18%, hsl(228 100% 74%) 24%, hsl(283 100% 73%) 30%, hsl(2 100% 70%) 36%);
+    background-size: 300% 300%;
+    background-position: var(--px) var(--py);
+    mix-blend-mode: color-dodge;
+    opacity: calc(.12 + var(--hyp) * .35);
+    filter: brightness(.7) contrast(1.4) saturate(1.2);
+    transition: opacity .3s;
+  }
+  /* specular light following the pointer */
+  .holo__glare {
+    background: radial-gradient(farthest-corner circle at var(--px) var(--py),
+      rgb(255 255 255 / .75) 0%, rgb(255 255 255 / .15) 25%, rgb(0 0 0 / .35) 90%);
+    mix-blend-mode: overlay;
+    opacity: calc(.2 + var(--hyp) * .6);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .holo__inner { transform: none; transition: none; }
+  }
+</style>
