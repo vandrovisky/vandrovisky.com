@@ -161,3 +161,13 @@ Todos desligam ou simplificam com `prefers-reduced-motion: reduce`; efeitos de c
 - Prints dos 3 sites: se as telas exigem login, se há dados reais a borrar, e se a JMV está de acordo. Fallback: Eric envia os prints e Claude só limpa/otimiza. (Em 2026-11-14 o colorfantasy.art deu timeout.)
 - Texto sobre RPG (mesa? qual sistema?).
 - Foto/avatar.
+
+## 8. Revisão 2026-11-18 — página única e só cases descritos (decisão do Eric)
+
+Substitui as partes correspondentes de 5.3 e 5.4.
+
+- **Página única contínua** em `/` (EN) e `/pt/` (PT): Hero → Sobre (trajetória, stack, formação, idiomas, certificações) → Cases → Hobbies (RPG + mesa de cartas) → Contato. O menu rola até as seções (âncoras `#about #cases #hobbies #contact` / `#sobre #cases #hobbies #contato`) e destaca a seção visível. Rolagem suave só sem `prefers-reduced-motion`.
+- Saem as páginas `/about/`, `/work/` (lista), `/hobbies/`, `/contact/` e equivalentes PT. Site ainda não está no ar: sem redirects.
+- **Só cases descritos**: saem JMV Play, Color Fantasy e Ágora (e o script de captura de prints). Ficam: migração PHP → Laravel com testes, agentes de IA no WhatsApp, integrações de pagamento, este portfólio.
+- **Cada case tem página própria** (`/work/<slug>/`, `/pt/trabalho/<slug>/`) aberta com a transição de íris a partir do card; "voltar" leva para `#cases` da página única. *(Recomendação do Claude, aceita pelo Eric.)*
+- Troca de idioma: página única ↔ página única; case ↔ mesmo case; case sem equivalente → `#cases` do outro idioma.
