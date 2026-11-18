@@ -1,0 +1,70 @@
+---
+import { ROUTES, type RouteId } from '../i18n/paths';
+import { t, type Lang, type UiKey } from '../i18n/ui';
+import LangSwitch from './LangSwitch.astro';
+
+interface Props {
+  lang: Lang;
+  alternates: Partial<Record<Lang, string>>;
+}
+
+const { lang, alternates } = Astro.props;
+const items: RouteId[] = ['about', 'work', 'hobbies', 'contact'];
+const here = Astro.url.pathname;
+const isCurrent = (id: RouteId) =>
+  id === 'work' ? here.startsWith(ROUTES.work[lang]) : here === ROUTES[id][lang];
+---
+
+<header class="site-header" data-nav>
+  <div class="container site-header__inner">
+    <a class="site-header__brand" href={ROUTES.home[lang]} aria-current={here === ROUTES.home[lang] ? 'page' : undefined}>
+      Eric Robertson
+    </a>
+    <nav aria-label={t(lang, 'nav.label')}>
+      <ul class="site-nav">
+        {items.map((id) => (
+          <li>
+            <a href={ROUTES[id][lang]} aria-current={isCurrent(id) ? 'page' : undefined}>
+              {t(lang, `nav.${id}` as UiKey)}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <LangSwitch lang={lang} alternates={alternates} />
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in srgb, var(--color-bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-line);
+  }
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    min-height: 3.5rem;
+    flex-wrap: wrap;
+  }
+  .site-header__brand {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-decoration: none;
+    margin-right: auto;
+  }
+  .site-nav {
+    display: flex;
+    gap: var(--space-4);
+    list-style: none;
+    padding: 0;
+    flex-wrap: wrap;
+  }
+  .site-nav a { text-decoration: none; color: var(--color-muted); }
+  .site-nav a[aria-current='page'], .site-nav a:hover { color: var(--color-ink); }
+  .site-nav a[aria-current='page'] { text-decoration: underline; text-underline-offset: 6px; }
+</style>

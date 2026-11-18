@@ -1,0 +1,34 @@
+---
+import { LANGS, LOCALE_TAG, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  /** Absolute paths of this page in every language that has it. */
+  alternates: Partial<Record<Lang, string>>;
+  ogImage?: string;
+}
+
+const { lang, title, description, alternates, ogImage = '/og.png' } = Astro.props;
+const site = Astro.site!;
+const canonical = new URL(Astro.url.pathname, site).href;
+const xDefault = alternates.en ?? alternates[lang];
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{LANGS.filter((l) => alternates[l]).map((l) => (
+  <link rel="alternate" hreflang={LOCALE_TAG[l]} href={new URL(alternates[l]!, site).href} />
+))}
+{xDefault && <link rel="alternate" hreflang="x-default" href={new URL(xDefault, site).href} />}
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Eric Robertson" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={new URL(ogImage, site).href} />
+<meta property="og:locale" content={LOCALE_TAG[lang].replace('-', '_')} />
+<meta name="twitter:card" content="summary_large_image" />

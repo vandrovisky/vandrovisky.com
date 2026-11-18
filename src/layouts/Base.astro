@@ -1,0 +1,43 @@
+---
+import '../styles/global.css';
+import Seo from '../components/Seo.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { alternatePath } from '../i18n/paths';
+import { LOCALE_TAG, t, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  /** Paths of this page per language. Defaults to the fixed-route mapping. */
+  alternates?: Partial<Record<Lang, string>>;
+  ogImage?: string;
+}
+
+const { lang, title, description, ogImage } = Astro.props;
+const here = Astro.url.pathname;
+const alternates = Astro.props.alternates ?? {
+  en: alternatePath(here, 'en'),
+  pt: alternatePath(here, 'pt'),
+};
+---
+
+<!doctype html>
+<html lang={LOCALE_TAG[lang]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <Seo lang={lang} title={title} description={description} alternates={alternates} ogImage={ogImage} />
+  </head>
+  <body>
+    <a class="skip-link visually-hidden" href="#content">{t(lang, 'skip.content')}</a>
+    <Nav lang={lang} alternates={alternates} />
+    <main id="content" class="container">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+  </body>
+</html>

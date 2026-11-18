@@ -46,3 +46,14 @@ a { color: inherit; }
   clip: rect(0 0 0 0);
   white-space: nowrap;
 }
+
+.skip-link:focus {
+  position: fixed !important;
+  top: var(--space-2); left: var(--space-2);
+  width: auto; height: auto;
+  clip: auto;
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-ink);
+  color: var(--color-bg);
+  z-index: 100;
+}
