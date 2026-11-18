@@ -94,3 +94,26 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   [data-nav] { transition: none; }
 }
+
+/* ---------- page transition: iris from the click point ---------- */
+@property --vt-r {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 0px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+
+  ::view-transition-old(root) { animation: none; }
+  ::view-transition-new(root) {
+    -webkit-mask-image: radial-gradient(circle at var(--vt-at, 50% 50%), #000 var(--vt-r), transparent calc(var(--vt-r) + 1px));
+    mask-image: radial-gradient(circle at var(--vt-at, 50% 50%), #000 var(--vt-r), transparent calc(var(--vt-r) + 1px));
+    animation: vt-iris .48s var(--ease-out) both;
+  }
+}
+
+@keyframes vt-iris {
+  from { --vt-r: 0px; }
+  to { --vt-r: 150vmax; }
+}
