@@ -1,0 +1,40 @@
+---
+import { SECTIONS } from '../i18n/paths';
+import { t, type Lang } from '../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const copy = {
+  en: { h1: 'Let’s talk', lead: 'Open to mid-level full-stack and backend roles — remote, hybrid, or on-site in Divinópolis/MG.' },
+  pt: { h1: 'Vamos conversar', lead: 'Aberto a vagas de desenvolvedor fullstack e backend pleno — remoto, híbrido ou presencial em Divinópolis/MG.' },
+}[lang];
+const links = [
+  { label: 'E-mail', href: 'mailto:ericrrp37@gmail.com', text: 'ericrrp37@gmail.com' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/eric-robertson-ribeiro-pires-12a068120/', text: 'linkedin.com/in/eric-robertson' },
+  { label: 'GitHub', href: 'https://github.com/vandrovisky', text: 'github.com/vandrovisky' },
+];
+---
+
+<section id={SECTIONS.contact[lang]} data-alt={SECTIONS.contact[lang === 'en' ? 'pt' : 'en']} class="contact section" aria-labelledby="contact-title">
+  <h2 id="contact-title" class="section__title" data-cursor-anchor data-reveal="words">{copy.h1}</h2>
+  <p class="contact__lead" data-reveal>{copy.lead}</p>
+  <ul class="contact__links" data-reveal>
+    {links.map((l) => <li><span>{l.label}</span><a href={l.href}>{l.text}</a></li>)}
+  </ul>
+  <p data-reveal><a class="button" href={`/cv/eric-robertson-cv-${lang}.pdf`} download>{t(lang, 'cv.download')}</a></p>
+</section>
+
+<style>
+  .contact__lead { font-size: 1.25rem; max-width: var(--measure); }
+  .contact__links { list-style: none; padding: 0; display: grid; gap: var(--space-3); }
+  .contact__links li { display: grid; grid-template-columns: 6rem 1fr; }
+  .contact__links span { font-family: var(--font-mono); font-size: .85rem; color: var(--color-muted); }
+  .button {
+    display: inline-block;
+    padding: var(--space-3) var(--space-5);
+    border-radius: 999px;
+    background: var(--color-ink);
+    color: var(--color-bg);
+    text-decoration: none;
+  }
+</style>

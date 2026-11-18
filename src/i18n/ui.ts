@@ -5,9 +5,8 @@ export type Lang = (typeof LANGS)[number];
 export const LOCALE_TAG: Record<Lang, string> = { en: 'en-US', pt: 'pt-BR' };
 
 const en = {
-  'nav.home': 'Home',
   'nav.about': 'About',
-  'nav.work': 'Work',
+  'nav.cases': 'Cases',
   'nav.hobbies': 'Hobbies',
   'nav.contact': 'Contact',
   'nav.label': 'Main navigation',
@@ -24,9 +23,8 @@ const en = {
 export type UiKey = keyof typeof en;
 
 const pt: Record<UiKey, string> = {
-  'nav.home': 'Início',
   'nav.about': 'Sobre',
-  'nav.work': 'Trabalho',
+  'nav.cases': 'Cases',
   'nav.hobbies': 'Hobbies',
   'nav.contact': 'Contato',
   'nav.label': 'Navegação principal',

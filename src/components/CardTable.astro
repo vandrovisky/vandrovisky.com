@@ -16,15 +16,15 @@ const title = lang === 'en' ? 'Card table' : 'Mesa de cartas';
 const hint = lang === 'en' ? 'A new hand every visit. Hover or touch a card.' : 'Uma mão nova a cada visita. Passe o mouse ou toque numa carta.';
 ---
 
-<section class="card-table" data-reveal>
-  <h2>{title}</h2>
+<div class="card-table" data-reveal>
+  <h3>{title}</h3>
   <p class="card-table__hint">{hint}</p>
   <div class="card-table__grid" data-card-table>
     {initial.map((card) => <HoloCard card={card} />)}
   </div>
   <script type="application/json" data-card-pool set:html={JSON.stringify(slim)} />
   <p class="card-table__disclaimer">{t(lang, 'cards.disclaimer')}</p>
-</section>
+</div>
 
 <script>
   import { initHolo } from '../scripts/holo';

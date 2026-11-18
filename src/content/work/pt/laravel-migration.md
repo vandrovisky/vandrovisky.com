@@ -7,7 +7,7 @@ stack: ["PHP","Laravel","Pest","Docker","Horizon","Redis"]
 year: 2026
 kind: technical
 order: 4
-featured: false
+featured: true
 builtAt: "Prontomed"
 ---
 

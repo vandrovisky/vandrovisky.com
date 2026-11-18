@@ -7,7 +7,7 @@ stack: ["Laravel","Stripe","PayPal","Cora","WHMCS"]
 year: 2024
 kind: technical
 order: 6
-featured: false
+featured: true
 builtAt: "JMV Technology"
 ---
 

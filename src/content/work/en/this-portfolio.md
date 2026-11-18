@@ -7,7 +7,7 @@ stack: ["Astro","TypeScript","View Transitions","GitHub Actions","Cloudflare"]
 year: 2026
 kind: meta
 order: 7
-featured: false
+featured: true
 ---
 
 TODO(conteúdo): context → problem → architecture → decisions → result.

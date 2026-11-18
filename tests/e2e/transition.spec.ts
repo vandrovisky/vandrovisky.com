@@ -4,8 +4,8 @@ test('clicking a nav link navigates and stores the click origin', async ({ page 
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message));
   await page.goto('/');
-  await page.getByRole('navigation').getByRole('link', { name: 'About' }).click();
-  await expect(page).toHaveURL(/\/about\/$/);
+  await page.locator('#cases [data-case] a').first().click();
+  await expect(page).toHaveURL(/\/work\/[a-z-]+\/$/);
   const at = await page.evaluate(() => document.documentElement.style.getPropertyValue('--vt-at'));
   expect(at).toMatch(/^\d+(\.\d+)?px \d+(\.\d+)?px$/);
   expect(errors).toEqual([]);
@@ -18,8 +18,8 @@ test('navigation still works when sessionStorage throws', async ({ page }) => {
     Object.defineProperty(window, 'sessionStorage', { get() { throw new Error('blocked'); } });
   });
   await page.goto('/');
-  await page.getByRole('navigation').getByRole('link', { name: 'About' }).click();
-  await expect(page).toHaveURL(/\/about\/$/);
+  await page.locator('#cases [data-case] a').first().click();
+  await expect(page).toHaveURL(/\/work\/[a-z-]+\/$/);
   expect(errors).toEqual([]);
 });
 

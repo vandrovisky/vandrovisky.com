@@ -1,53 +1,73 @@
 import { expect, test } from '@playwright/test';
 
-const PAGES = ['/', '/about/', '/work/', '/hobbies/', '/contact/', '/pt/', '/pt/sobre/', '/pt/trabalho/', '/pt/hobbies/', '/pt/contato/'];
+const SECTIONS = {
+  '/': ['about', 'cases', 'hobbies', 'contact'],
+  '/pt/': ['sobre', 'cases', 'hobbies', 'contato'],
+};
 
-for (const path of PAGES) {
-  test(`${path} responds with one <h1>`, async ({ page }) => {
+for (const [path, ids] of Object.entries(SECTIONS)) {
+  test(`${path} is one continuous page with every section`, async ({ page }) => {
     const res = await page.goto(path);
     expect(res?.status()).toBe(200);
     await expect(page.locator('h1')).toHaveCount(1);
+    const order = await page.locator('main section[id]').evaluateAll((els) => els.map((e) => e.id));
+    expect(order).toEqual(ids);
   });
 }
 
-test('work lists 7 cases in each language', async ({ page }) => {
-  await page.goto('/work/');
-  await expect(page.locator('[data-case]')).toHaveCount(7);
-  await page.goto('/pt/trabalho/');
-  await expect(page.locator('[data-case]')).toHaveCount(7);
-});
-
-test('case page renders and credits JMV', async ({ page }) => {
-  const res = await page.goto('/work/jmv-play/');
-  expect(res?.status()).toBe(200);
-  await expect(page.getByText('JMV Technology')).toBeVisible();
-});
-
-test('visual cases never link to the live sites', async ({ page }) => {
-  for (const path of ['/', '/work/', '/pt/trabalho/', '/work/jmv-play/', '/work/color-fantasy/', '/work/agora/', '/pt/trabalho/agora/']) {
+test('only the described cases are listed', async ({ page }) => {
+  for (const path of ['/', '/pt/']) {
     await page.goto(path);
-    await expect(page.locator('a[href*="jmvplay"], a[href*="colorfantasy"], a[href*="jmvstream"]')).toHaveCount(0);
+    await expect(page.locator('#cases [data-case]')).toHaveCount(4);
   }
 });
 
+test('removed pages and visual cases are gone', async ({ request }) => {
+  for (const path of ['/about/', '/work/', '/hobbies/', '/contact/', '/pt/sobre/', '/pt/trabalho/', '/pt/hobbies/', '/pt/contato/',
+    '/work/jmv-play/', '/work/color-fantasy/', '/work/agora/', '/pt/trabalho/agora/']) {
+    expect((await request.get(path)).status(), path).toBe(404);
+  }
+});
+
+test('case page renders, credits the company and goes back to the cases section', async ({ page }) => {
+  const res = await page.goto('/work/laravel-migration/');
+  expect(res?.status()).toBe(200);
+  await expect(page.getByText('Prontomed')).toBeVisible();
+  await page.getByRole('link', { name: /All work|cases/i }).first().click();
+  await expect(page).toHaveURL(/\/#cases$/);
+});
+
+test('nav on a case page points back to the single page sections', async ({ page }) => {
+  await page.goto('/pt/trabalho/payments/');
+  const hrefs = await page.getByRole('navigation').getByRole('link').evaluateAll((as) => as.map((a) => a.getAttribute('href')));
+  expect(hrefs).toEqual(['/pt/#sobre', '/pt/#cases', '/pt/#hobbies', '/pt/#contato']);
+});
+
 test('case language switch keeps the case', async ({ page }) => {
-  await page.goto('/work/agora/');
+  await page.goto('/work/payments/');
   await page.getByRole('link', { name: 'Ler em português' }).click();
-  await expect(page).toHaveURL(/\/pt\/trabalho\/agora\/$/);
+  await expect(page).toHaveURL(/\/pt\/trabalho\/payments\/$/);
 });
 
-test('about has certifications section', async ({ page }) => {
-  await page.goto('/about/');
-  await expect(page.locator('#certifications')).toBeVisible();
-  await page.goto('/pt/sobre/');
-  await expect(page.locator('#certificacoes')).toBeVisible();
+test('about section has certifications', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('#certifications')).toBeAttached();
+  await page.goto('/pt/');
+  await expect(page.locator('#certificacoes')).toBeAttached();
 });
 
-test('cv pdfs are downloadable', async ({ request, page }) => {
+test('cv pdfs are downloadable from the contact section', async ({ request, page }) => {
   expect((await request.get('/cv/eric-robertson-cv-en.pdf')).status()).toBe(200);
   expect((await request.get('/cv/eric-robertson-cv-pt.pdf')).status()).toBe(200);
-  await page.goto('/contact/');
-  await expect(page.locator('a[href="/cv/eric-robertson-cv-en.pdf"]')).toBeVisible();
+  await page.goto('/');
+  await expect(page.locator('#contact a[href="/cv/eric-robertson-cv-en.pdf"]')).toBeAttached();
+});
+
+test('no link to the JMV live sites anywhere', async ({ page }) => {
+  for (const path of ['/', '/pt/', '/work/payments/']) {
+    await page.goto(path);
+    await expect(page.locator('a[href*="jmvplay"], a[href*="colorfantasy"], a[href*="jmvstream"]')).toHaveCount(0);
+  }
 });
 
 test('unknown page is a 404 with a way home', async ({ page }) => {
@@ -59,7 +79,7 @@ test('unknown page is a 404 with a way home', async ({ page }) => {
 for (const width of [360, 1280]) {
   test(`no horizontal overflow at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 800 });
-    for (const path of ['/', '/work/', '/about/', '/hobbies/', '/contact/']) {
+    for (const path of ['/', '/pt/', '/work/laravel-migration/']) {
       await page.goto(path);
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
       expect(overflow, path).toBeLessThanOrEqual(0);

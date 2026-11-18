@@ -122,3 +122,18 @@ a { color: inherit; }
   from { --vt-r: 0px; }
   to { --vt-r: 150vmax; }
 }
+
+/* ---------- single page sections ---------- */
+.section {
+  display: grid;
+  gap: var(--space-5);
+  padding-block: var(--space-7);
+  border-top: 1px solid var(--color-line);
+  scroll-margin-top: 4.5rem; /* sticky header */
+}
+.section__title { font-size: clamp(2.25rem, 6vw, 4.5rem); }
+.section__lead { font-size: 1.2rem; max-width: var(--measure); color: var(--color-muted); }
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}

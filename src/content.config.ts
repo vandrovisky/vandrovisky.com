@@ -13,7 +13,7 @@ const work = defineCollection({
       role: z.string(),
       stack: z.array(z.string()),
       year: z.number().int(),
-      kind: z.enum(['visual', 'technical', 'meta']),
+      kind: z.enum(['technical', 'meta']),
       order: z.number(),
       featured: z.boolean().default(false),
       builtAt: z.string().optional(),

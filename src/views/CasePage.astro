@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import { render } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import { ROUTES } from '../i18n/paths';
+import { ROUTES, sectionHref } from '../i18n/paths';
 import { caseSlug, caseSlugsFor, type Case } from '../i18n/content';
 import { t } from '../i18n/ui';
 
@@ -12,17 +12,17 @@ const { title, summary, role, stack, year, builtAt, cover, gallery, lang } = ent
 const { Content } = await render(entry);
 const slugs = await caseSlugsFor(caseSlug(entry));
 const alternates = {
-  en: slugs.en ? `${ROUTES.work.en}${slugs.en}/` : ROUTES.work.en,
-  pt: slugs.pt ? `${ROUTES.work.pt}${slugs.pt}/` : ROUTES.work.pt,
+  en: slugs.en ? `${ROUTES.work.en}${slugs.en}/` : sectionHref('cases', 'en'),
+  pt: slugs.pt ? `${ROUTES.work.pt}${slugs.pt}/` : sectionHref('cases', 'pt'),
 };
 const labels = lang === 'en'
-  ? { role: 'Role', stack: 'Stack', year: 'Year', back: '← All work' }
-  : { role: 'Papel', stack: 'Stack', year: 'Ano', back: '← Todos os trabalhos' };
+  ? { role: 'Role', stack: 'Stack', year: 'Year', back: '← All cases' }
+  : { role: 'Papel', stack: 'Stack', year: 'Ano', back: '← Todos os cases' };
 ---
 
 <Base lang={lang} title={`${title} — Eric Robertson`} description={summary} alternates={alternates}>
   <article class="case">
-    <a class="case__back" href={ROUTES.work[lang]}>{labels.back}</a>
+    <a class="case__back" href={sectionHref('cases', lang)}>{labels.back}</a>
     <h1 data-reveal="words">{title}</h1>
     <p class="case__summary">{summary}</p>
     <dl class="case__facts">

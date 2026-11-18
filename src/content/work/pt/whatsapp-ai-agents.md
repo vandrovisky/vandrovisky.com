@@ -7,7 +7,7 @@ stack: ["Chatwoot","LLM agents","WhatsApp","Python","Laravel"]
 year: 2026
 kind: technical
 order: 5
-featured: false
+featured: true
 builtAt: "JMV Technology"
 ---
 

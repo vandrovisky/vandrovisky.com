@@ -1,6 +1,6 @@
 # vandrovisky.com
 
-Portfólio pessoal de Eric Robertson. Astro estático, EN em `/` e PT em `/pt/`, animações em TypeScript puro (sem framework), cartas TCG holográficas e deploy na Cloudflare via GitHub Actions.
+Portfólio pessoal de Eric Robertson. Astro estático, uma página contínua por idioma (EN em `/`, PT em `/pt/`) mais uma página por case, animações em TypeScript puro (sem framework), cartas TCG holográficas e deploy na Cloudflare via GitHub Actions.
 
 - Design: `docs/superpowers/specs/2026-11-14-portfolio-design.md`
 - Plano da fundação: `docs/superpowers/plans/2026-11-14-portfolio-foundation.md`
@@ -20,7 +20,6 @@ npm run dev        # http://localhost:4321
 | `npm test` | testes unitários (Vitest) |
 | `npm run test:e2e` | testes no navegador (Playwright) contra o build, usando o pool semente de cartas |
 | `npm run cards:seed` | atualiza o pool semente versionado em `cards-seed/` (10 cartas por jogo) |
-| `npm run capture -- <slug> <url>` | gera prints de um site em `src/assets/work/` |
 
 `CARDS_OFFLINE=1` faz o prebuild pular as APIs e usar só o pool semente.
 

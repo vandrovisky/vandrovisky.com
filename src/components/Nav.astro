@@ -1,5 +1,5 @@
 ---
-import { ROUTES, type RouteId } from '../i18n/paths';
+import { ROUTES, SECTIONS, sectionHref, type SectionId } from '../i18n/paths';
 import { t, type Lang, type UiKey } from '../i18n/ui';
 import LangSwitch from './LangSwitch.astro';
 
@@ -9,22 +9,18 @@ interface Props {
 }
 
 const { lang, alternates } = Astro.props;
-const items: RouteId[] = ['about', 'work', 'hobbies', 'contact'];
-const here = Astro.url.pathname;
-const isCurrent = (id: RouteId) =>
-  id === 'work' ? here.startsWith(ROUTES.work[lang]) : here === ROUTES[id][lang];
+const items: SectionId[] = ['about', 'cases', 'hobbies', 'contact'];
+const isHome = Astro.url.pathname === ROUTES.home[lang];
 ---
 
 <header class="site-header" data-nav>
   <div class="container site-header__inner">
-    <a class="site-header__brand" href={ROUTES.home[lang]} aria-current={here === ROUTES.home[lang] ? 'page' : undefined}>
-      Eric Robertson
-    </a>
+    <a class="site-header__brand" href={ROUTES.home[lang]}>Eric Robertson</a>
     <nav aria-label={t(lang, 'nav.label')}>
       <ul class="site-nav">
         {items.map((id) => (
           <li>
-            <a href={ROUTES[id][lang]} aria-current={isCurrent(id) ? 'page' : undefined}>
+            <a href={sectionHref(id, lang)} data-section-link={isHome ? SECTIONS[id][lang] : undefined}>
               {t(lang, `nav.${id}` as UiKey)}
             </a>
           </li>
@@ -65,6 +61,6 @@ const isCurrent = (id: RouteId) =>
     flex-wrap: wrap;
   }
   .site-nav a { text-decoration: none; color: var(--color-muted); }
-  .site-nav a[aria-current='page'], .site-nav a:hover { color: var(--color-ink); }
-  .site-nav a[aria-current='page'] { text-decoration: underline; text-underline-offset: 6px; }
+  .site-nav a[aria-current], .site-nav a:hover { color: var(--color-ink); }
+  .site-nav a[aria-current] { text-decoration: underline; text-underline-offset: 6px; }
 </style>

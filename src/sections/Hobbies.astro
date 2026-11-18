@@ -1,0 +1,18 @@
+---
+import CardTable from '../components/CardTable.astro';
+import { SECTIONS } from '../i18n/paths';
+import type { Lang } from '../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const copy = {
+  en: { h2: 'Hobbies', rpg: 'TODO(conteúdo): RPG text.' },
+  pt: { h2: 'Hobbies', rpg: 'TODO(conteúdo): texto sobre RPG.' },
+}[lang];
+---
+
+<section id={SECTIONS.hobbies[lang]} data-alt={SECTIONS.hobbies[lang === 'en' ? 'pt' : 'en']} class="section" aria-labelledby="hobbies-title">
+  <h2 id="hobbies-title" class="section__title" data-cursor-anchor data-reveal="words">{copy.h2}</h2>
+  <div data-reveal><h3>RPG</h3><p>{copy.rpg}</p></div>
+  <CardTable lang={lang} />
+</section>

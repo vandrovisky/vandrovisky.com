@@ -14,8 +14,7 @@
     "test": "vitest run",
     "test:e2e": "playwright test",
     "prebuild": "tsx scripts/cards/build.ts",
-    "cards:seed": "tsx scripts/cards/seed.ts",
-    "capture": "tsx scripts/capture.ts"
+    "cards:seed": "tsx scripts/cards/seed.ts"
   },
   "dependencies": {
     "astro": "^7.4.13"

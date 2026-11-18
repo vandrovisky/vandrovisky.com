@@ -2,7 +2,7 @@ import { devices, expect, test } from '@playwright/test';
 
 test.describe('desktop with mouse', () => {
   test('cursor follows the pointer with a spring', async ({ page }) => {
-    await page.goto('/about/');
+    await page.goto('/');
     await page.mouse.move(200, 300);
     await page.waitForTimeout(500);
     await expect(page.locator('html')).toHaveAttribute('data-cursor', '');
@@ -11,7 +11,7 @@ test.describe('desktop with mouse', () => {
   });
 
   test('cursor becomes a ring over links and a caret over text', async ({ page }) => {
-    await page.goto('/about/');
+    await page.goto('/');
     await page.mouse.move(5, 5);
     await page.getByRole('navigation').getByRole('link').first().hover();
     await expect(page.locator('.cursor')).toHaveAttribute('data-shape', 'ring');

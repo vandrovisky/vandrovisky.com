@@ -4,7 +4,7 @@ const loaded = (page: import('@playwright/test').Page) =>
   page.locator('.holo img').evaluateAll((imgs) => imgs.map((i) => (i as HTMLImageElement).complete && (i as HTMLImageElement).naturalWidth > 0));
 
 test('six holo cards with loaded images and the disclaimer', async ({ page }) => {
-  await page.goto('/hobbies/');
+  await page.goto('/');
   await expect(page.locator('.holo')).toHaveCount(6);
   await page.waitForLoadState('networkidle');
   expect((await loaded(page)).every(Boolean)).toBe(true);
@@ -12,19 +12,19 @@ test('six holo cards with loaded images and the disclaimer', async ({ page }) =>
 });
 
 test('pt page has the cards too', async ({ page }) => {
-  await page.goto('/pt/hobbies/');
+  await page.goto('/pt/');
   await expect(page.locator('.holo')).toHaveCount(6);
 });
 
 test('alt text describes each card', async ({ page }) => {
-  await page.goto('/hobbies/');
+  await page.goto('/');
   const alts = await page.locator('.holo img').evaluateAll((imgs) => imgs.map((i) => i.getAttribute('alt') ?? ''));
   expect(alts).toHaveLength(6);
   expect(alts.every((a) => / — /.test(a))).toBe(true);
 });
 
 test('hovering tilts the card', async ({ page }) => {
-  await page.goto('/hobbies/');
+  await page.goto('/');
   const card = page.locator('.holo').first();
   await card.scrollIntoViewIfNeeded();
   const box = (await card.boundingBox())!;
@@ -38,7 +38,7 @@ test('hovering tilts the card', async ({ page }) => {
 test('the hand changes between visits', async ({ page }) => {
   const hands = new Set<string>();
   for (let i = 0; i < 5; i++) {
-    await page.goto('/hobbies/');
+    await page.goto('/');
     hands.add((await page.locator('.holo img').evaluateAll((imgs) => imgs.map((i) => i.getAttribute('alt')))).join('|'));
   }
   expect(hands.size).toBeGreaterThanOrEqual(2);
@@ -47,7 +47,7 @@ test('the hand changes between visits', async ({ page }) => {
 test.describe('without JavaScript', () => {
   test.use({ javaScriptEnabled: false });
   test('six cards still render', async ({ page }) => {
-    await page.goto('/hobbies/');
+    await page.goto('/');
     await expect(page.locator('.holo')).toHaveCount(6);
     await expect(page.locator('.holo img').first()).toBeVisible();
   });
@@ -57,7 +57,7 @@ test.describe('touch', () => {
   const { defaultBrowserType: _ignored, ...pixel } = devices['Pixel 7'];
   test.use(pixel);
   test('a tap tilts, tapping elsewhere flattens it again', async ({ page }) => {
-    await page.goto('/hobbies/');
+    await page.goto('/');
     const card = page.locator('.holo').first();
     await card.scrollIntoViewIfNeeded();
     const box = (await card.boundingBox())!;
@@ -71,7 +71,7 @@ test.describe('touch, single tap', () => {
   const { defaultBrowserType: _ignored, ...pixel } = devices['Pixel 7'];
   test.use(pixel);
   test('a single tap does not leave the card tilted', async ({ page }) => {
-    await page.goto('/hobbies/');
+    await page.goto('/');
     const card = page.locator('.holo').first();
     await card.scrollIntoViewIfNeeded();
     const box = (await card.boundingBox())!;
@@ -82,7 +82,7 @@ test.describe('touch, single tap', () => {
 });
 
 test('mouse click keeps the pointer tilt (no snap to keyboard pose)', async ({ page }) => {
-  await page.goto('/hobbies/');
+  await page.goto('/');
   const card = page.locator('.holo').first();
   await card.scrollIntoViewIfNeeded();
   const box = (await card.boundingBox())!;
@@ -95,7 +95,7 @@ test('mouse click keeps the pointer tilt (no snap to keyboard pose)', async ({ p
 });
 
 test('keyboard focus gives the card a pose', async ({ page }) => {
-  await page.goto('/hobbies/');
+  await page.goto('/');
   const card = page.locator('.holo').first();
   await card.focus();
   await page.keyboard.press('Tab');
