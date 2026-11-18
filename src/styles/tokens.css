@@ -1,0 +1,35 @@
+/* PROVISIONAL tokens — the visual identity (Plan 2) replaces these values. */
+:root {
+  --color-bg: #f4f1ea;
+  --color-ink: #16151a;
+  --color-muted: #5d5a66;
+  --color-accent: #e8590c;
+  --color-line: #d9d4c7;
+
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: ui-monospace, 'JetBrains Mono', monospace;
+
+  --ease-out: cubic-bezier(.2, 0, 0, 1);
+
+  --space-1: .25rem;
+  --space-2: .5rem;
+  --space-3: .75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2.5rem;
+  --space-7: 4rem;
+  --space-8: 6rem;
+
+  --measure: 68ch;
+  --gutter: clamp(1rem, 4vw, 3rem);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #121116;
+    --color-ink: #eeeae2;
+    --color-muted: #a29fab;
+    --color-line: #2c2a33;
+  }
+}
