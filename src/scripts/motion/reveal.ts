@@ -18,7 +18,12 @@ function splitWords(el: HTMLElement): void {
   );
 }
 
+/** threshold 0 + bottom margin: works for sections taller than the viewport too. */
+export const REVEAL_OPTIONS = { threshold: 0, rootMargin: '0px 0px -10% 0px' } as const;
+
 export function initReveal(root: Document = document): void {
+  // Tells the CSS fallback the module is alive (see global.css).
+  root.documentElement.setAttribute('data-reveal-ready', '');
   const els = [...root.querySelectorAll<HTMLElement>('[data-reveal]')];
   els.filter((el) => el.dataset.reveal === 'words').forEach(splitWords);
 
@@ -35,7 +40,7 @@ export function initReveal(root: Document = document): void {
         io.unobserve(e.target);
       }
     },
-    { threshold: 0.15 },
+    REVEAL_OPTIONS,
   );
   els.forEach((el) => io.observe(el));
 }

@@ -44,7 +44,8 @@ export function initHolo(card: HTMLElement): () => void {
     delete card.dataset.active;
     apply(card, FLAT);
   };
-  const onFocus = () => { if (!still) apply(card, FOCUSED); };
+  // Only keyboard focus gets the pose: taps and clicks also focus the card, after pointerup.
+  const onFocus = () => { if (!still && card.matches(':focus-visible')) apply(card, FOCUSED); };
 
   card.addEventListener('pointermove', onMove);
   card.addEventListener('pointerdown', onMove);

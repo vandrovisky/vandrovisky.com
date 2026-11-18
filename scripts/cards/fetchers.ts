@@ -6,7 +6,7 @@ const HEADERS = { 'User-Agent': 'vandrovisky.com/1.0', Accept: 'application/json
 
 async function getJson(url: string): Promise<unknown> {
   if (process.env.CARDS_OFFLINE === '1') throw new Error('CARDS_OFFLINE=1');
-  const res = await fetch(url, { headers: HEADERS });
+  const res = await fetch(url, { headers: HEADERS, signal: AbortSignal.timeout(10_000) });
   if (!res.ok) throw new Error(`${url} → HTTP ${res.status}`);
   return res.json();
 }

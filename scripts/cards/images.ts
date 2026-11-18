@@ -20,11 +20,14 @@ async function mapLimit<T, R>(items: T[], limit: number, fn: (item: T) => Promis
 }
 
 /** Downloads each card image, resizes to `width` and saves WebP into `outDir`. Cards whose download fails are dropped. */
-export async function downloadAndOptimize(cards: Card[], outDir: string, width = 480): Promise<Card[]> {
+export async function downloadAndOptimize(cards: Card[], outDir: string, width = 480, timeoutMs = 15_000): Promise<Card[]> {
   await mkdir(outDir, { recursive: true });
   const done = await mapLimit(cards, 6, async (c): Promise<Card | null> => {
     try {
-      const res = await fetch(c.imageUrl, { headers: { 'User-Agent': 'vandrovisky.com/1.0' } });
+      const res = await fetch(c.imageUrl, {
+        headers: { 'User-Agent': 'vandrovisky.com/1.0' },
+        signal: AbortSignal.timeout(timeoutMs),
+      });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const buf = Buffer.from(await res.arrayBuffer());
       const file = imageFile(c);

@@ -55,3 +55,13 @@ test('nav comes back when it receives keyboard focus', async ({ page }) => {
   await nav.getByRole('link').first().focus();
   await expect(nav).not.toHaveAttribute('data-hidden', /.*/);
 });
+
+test('content shows up even when the bundled module is blocked', async ({ page }) => {
+  await page.route(/\/_astro\/.*\.js$/, (route) => route.abort());
+  await page.setViewportSize({ width: 1280, height: 600 });
+  await page.goto('/about/');
+  await expect(page.locator('html')).toHaveClass(/\bjs\b/); // inline script still ran
+  await expect
+    .poll(() => page.locator('section[data-reveal]').last().evaluate((e) => getComputedStyle(e).opacity), { timeout: 5000 })
+    .toBe('1');
+});

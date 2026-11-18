@@ -66,3 +66,39 @@ test.describe('touch', () => {
     await expect.poll(async () => card.evaluate((el) => (el as HTMLElement).style.getPropertyValue('--rx') || '0deg')).toBe('0deg');
   });
 });
+
+test.describe('touch, single tap', () => {
+  const { defaultBrowserType: _ignored, ...pixel } = devices['Pixel 7'];
+  test.use(pixel);
+  test('a single tap does not leave the card tilted', async ({ page }) => {
+    await page.goto('/hobbies/');
+    const card = page.locator('.holo').first();
+    await card.scrollIntoViewIfNeeded();
+    const box = (await card.boundingBox())!;
+    await page.touchscreen.tap(box.x + 8, box.y + 8);
+    await page.waitForTimeout(300);
+    expect(await card.evaluate((el) => (el as HTMLElement).style.getPropertyValue('--rx') || '0deg')).toBe('0deg');
+  });
+});
+
+test('mouse click keeps the pointer tilt (no snap to keyboard pose)', async ({ page }) => {
+  await page.goto('/hobbies/');
+  const card = page.locator('.holo').first();
+  await card.scrollIntoViewIfNeeded();
+  const box = (await card.boundingBox())!;
+  await page.mouse.move(box.x + box.width * 0.9, box.y + box.height * 0.5);
+  await page.mouse.down();
+  await page.mouse.up();
+  await page.waitForTimeout(100);
+  const ry = parseFloat(await card.evaluate((el) => (el as HTMLElement).style.getPropertyValue('--ry')));
+  expect(ry).toBeLessThan(0); // pointer on the right → negative rotateY, FOCUSED pose would be +6deg
+});
+
+test('keyboard focus gives the card a pose', async ({ page }) => {
+  await page.goto('/hobbies/');
+  const card = page.locator('.holo').first();
+  await card.focus();
+  await page.keyboard.press('Tab');
+  await page.keyboard.press('Shift+Tab');
+  await expect.poll(() => card.evaluate((el) => (el as HTMLElement).style.getPropertyValue('--ry'))).toBe('6deg');
+});

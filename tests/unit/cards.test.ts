@@ -3,7 +3,11 @@ import scryfall from '../fixtures/scryfall.json';
 import tcgdex from '../fixtures/tcgdex.json';
 import optcg from '../fixtures/optcg.json';
 import { normalizeOptcg, normalizeScryfall, normalizeTcgdex } from '../../scripts/cards/normalize';
-import { buildPool } from '../../scripts/cards/pool';
+import { buildPool, mergeWithSeed } from '../../scripts/cards/pool';
+import { downloadAndOptimize } from '../../scripts/cards/images';
+import { mkdtempSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import type { Card, Game } from '../../scripts/cards/types';
 
 const isHttp = (u: string) => /^https?:\/\//.test(u);
@@ -85,5 +89,36 @@ describe('buildPool', () => {
     expect(cards.filter((c) => c.game === 'pokemon')).toHaveLength(30);
     expect(cards.filter((c) => c.game === 'magic')).toHaveLength(20);
     expect(cards.filter((c) => c.game === 'onepiece')).toHaveLength(7);
+  });
+});
+
+describe('mergeWithSeed (after image downloads)', () => {
+  const c = (game: Game, i: number, prefix = ''): Card => ({ id: `${prefix}${game}-${i}`, game, name: 'n', set: 's', imageUrl: 'https://x', image: `/cards/${prefix}${game}-${i}.webp` });
+  const seed = (['pokemon', 'magic', 'onepiece'] as Game[]).flatMap((g) => Array.from({ length: 10 }, (_, i) => c(g, i, 'seed-')));
+
+  test('a game whose downloads mostly failed falls back to its seed', () => {
+    const downloaded = [...Array.from({ length: 30 }, (_, i) => c('magic', i)), c('pokemon', 1)];
+    const { cards, sources } = mergeWithSeed(downloaded, seed);
+    expect(sources).toEqual({ pokemon: 'seed', magic: 'live', onepiece: 'seed' });
+    expect(cards.filter((x) => x.game === 'pokemon').every((x) => x.id.startsWith('seed-'))).toBe(true);
+    expect(cards.filter((x) => x.game === 'magic')).toHaveLength(30);
+  });
+
+  test('all downloads failing still yields the full seed', () => {
+    const { cards } = mergeWithSeed([], seed);
+    expect(cards).toHaveLength(30);
+  });
+});
+
+describe('downloadAndOptimize', () => {
+  afterEach(() => vi.unstubAllGlobals());
+  test('a hanging image host is aborted and the card dropped', async () => {
+    vi.stubGlobal('fetch', (_url: string, init?: RequestInit) =>
+      new Promise((_, reject) => init?.signal?.addEventListener('abort', () => reject(new Error('aborted')))));
+    const dir = mkdtempSync(join(tmpdir(), 'cards-'));
+    const started = Date.now();
+    const out = await downloadAndOptimize([{ id: 'x', game: 'magic', name: 'n', set: 's', imageUrl: 'https://slow' }], dir, 480, 200);
+    expect(out).toEqual([]);
+    expect(Date.now() - started).toBeLessThan(2000);
   });
 });

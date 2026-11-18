@@ -43,3 +43,17 @@ export async function buildPool(
     sources: Object.fromEntries(results.map(([game, , source]) => [game, source])) as Record<Game, Source>,
   };
 }
+
+/**
+ * After image downloads: a game keeps its downloaded cards only if at least MIN_LIVE survived,
+ * otherwise it falls back to that game's seed.
+ */
+export function mergeWithSeed(downloaded: Card[], seed: Card[]): { cards: Card[]; sources: Record<Game, Source> } {
+  const sources = {} as Record<Game, Source>;
+  const cards = GAMES.flatMap((game) => {
+    const live = downloaded.filter((c) => c.game === game);
+    sources[game] = live.length >= MIN_LIVE ? 'live' : 'seed';
+    return sources[game] === 'live' ? live : seed.filter((c) => c.game === game);
+  });
+  return { cards, sources };
+}

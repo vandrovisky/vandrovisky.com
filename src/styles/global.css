@@ -65,6 +65,10 @@ a { color: inherit; }
     opacity: 0;
     transform: translateY(24px);
   }
+  /* Safety net: if the bundled module never runs (blocked/stale chunk), show everything after 2.5s. */
+  html.js:not([data-reveal-ready]) [data-reveal]:not([data-revealed]) {
+    animation: reveal-fallback .4s ease-out 2.5s forwards;
+  }
   html.js [data-reveal]:not([data-reveal='words'])[data-revealed] {
     animation: rise .7s var(--ease-out) both;
   }
@@ -79,6 +83,9 @@ a { color: inherit; }
   }
 }
 
+@keyframes reveal-fallback {
+  to { opacity: 1; transform: none; }
+}
 @keyframes rise {
   from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: none; }

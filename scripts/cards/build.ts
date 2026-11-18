@@ -4,7 +4,7 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { FETCHERS } from './fetchers';
 import { downloadAndOptimize } from './images';
-import { buildPool } from './pool';
+import { buildPool, mergeWithSeed } from './pool';
 import type { Card } from './types';
 
 const ROOT = process.cwd();
@@ -27,23 +27,28 @@ async function main() {
 
   await mkdir(PUBLIC_DIR, { recursive: true });
   const live = cards.filter((c) => sources[c.game] === 'live');
-  const fromSeed = cards.filter((c) => sources[c.game] === 'seed');
-
   const downloaded = await downloadAndOptimize(live, PUBLIC_DIR);
-  const copied: Card[] = [];
-  for (const c of fromSeed) {
+  // A game whose image downloads failed falls back to its seed too.
+  const merged = mergeWithSeed(downloaded, seed);
+  console.log('[cards] after downloads:', merged.sources);
+
+  const pool: Card[] = [];
+  for (const c of merged.cards) {
+    if (merged.sources[c.game] === 'live') {
+      pool.push(c);
+      continue;
+    }
     const file = c.image?.replace(/^\/cards\//, '');
     if (!file || !existsSync(join(SEED_DIR, 'img', file))) continue;
     await copyFile(join(SEED_DIR, 'img', file), join(PUBLIC_DIR, file));
-    copied.push(c);
+    pool.push(c);
   }
 
-  const pool = [...downloaded, ...copied].filter((c) => c.image);
   await mkdir(join(ROOT, 'src', 'data'), { recursive: true });
   await writeFile(OUT, JSON.stringify(pool, null, 1));
-  console.log(`[cards] ${pool.length} cards (${downloaded.length} live, ${copied.length} seed) → src/data/cards.json`);
-  if (pool.length === 0) {
-    console.error('[cards] no cards at all: APIs down and no seed. Run `npm run cards:seed`.');
+  console.log(`[cards] ${pool.length} cards → src/data/cards.json`);
+  if (pool.length < 6) {
+    console.error('[cards] fewer than 6 cards: APIs down and seed missing. Run `npm run cards:seed`.');
     process.exit(1);
   }
 }
