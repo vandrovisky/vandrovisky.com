@@ -1,0 +1,50 @@
+[
+ {
+  "card_name": "Trafalgar Law (047)",
+  "set_name": "Romance Dawn",
+  "rarity": "SR",
+  "card_set_id": "OP01-047",
+  "card_image_id": "OP01-047",
+  "card_image": "https://optcgapi.com/media/static/Card_Images/OP01-047.jpg"
+ },
+ {
+  "card_name": "Eustass\"Captain\"Kid",
+  "set_name": "Romance Dawn",
+  "rarity": "SR",
+  "card_set_id": "OP01-051",
+  "card_image_id": "OP01-051",
+  "card_image": "https://optcgapi.com/media/static/Card_Images/OP01-051.jpg"
+ },
+ {
+  "card_name": "Roronoa Zoro (025)",
+  "set_name": "Romance Dawn",
+  "rarity": "SR",
+  "card_set_id": "OP01-025",
+  "card_image_id": "OP01-025",
+  "card_image": "https://optcgapi.com/media/static/Card_Images/OP01-025.jpg"
+ },
+ {
+  "card_name": "Kaido (094)",
+  "set_name": "Romance Dawn",
+  "rarity": "SR",
+  "card_set_id": "OP01-094",
+  "card_image_id": "OP01-094",
+  "card_image": "https://optcgapi.com/media/static/Card_Images/OP01-094.jpg"
+ },
+ {
+  "card_name": "You Can Be My Samurai!!",
+  "set_name": "Romance Dawn",
+  "rarity": "C",
+  "card_set_id": "OP01-055",
+  "card_image_id": "OP01-055",
+  "card_image": "https://optcgapi.com/media/static/Card_Images/OP01-055.jpg"
+ },
+ {
+  "card_name": "No Image",
+  "set_name": "X",
+  "rarity": "SR",
+  "card_set_id": "OP99-001",
+  "card_image_id": "OP99-001",
+  "card_image": null
+ }
+]

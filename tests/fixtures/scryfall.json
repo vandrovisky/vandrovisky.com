@@ -1,0 +1,110 @@
+{
+ "object": "list",
+ "has_more": true,
+ "data": [
+  {
+   "object": "card",
+   "id": "de7a150b-1b0d-4928-a2cc-80a4b7412350",
+   "name": "Aang, Airbending Master",
+   "set_name": "Avatar: The Last Airbender Eternal",
+   "rarity": "mythic",
+   "image_uris": {
+    "small": "https://cards.scryfall.io/small/front/d/e/de7a150b-1b0d-4928-a2cc-80a4b7412350.jpg?1783904837",
+    "normal": "https://cards.scryfall.io/normal/front/d/e/de7a150b-1b0d-4928-a2cc-80a4b7412350.jpg?1783904837",
+    "large": "https://cards.scryfall.io/large/front/d/e/de7a150b-1b0d-4928-a2cc-80a4b7412350.jpg?1783904837"
+   },
+   "layout": "normal"
+  },
+  {
+   "object": "card",
+   "id": "c9f1fc97-00c0-492b-a4a3-b179afc2f95d",
+   "name": "Abaddon the Despoiler",
+   "set_name": "Warhammer 40,000 Commander",
+   "rarity": "mythic",
+   "image_uris": {
+    "small": "https://cards.scryfall.io/small/front/c/9/c9f1fc97-00c0-492b-a4a3-b179afc2f95d.jpg?1783920953",
+    "normal": "https://cards.scryfall.io/normal/front/c/9/c9f1fc97-00c0-492b-a4a3-b179afc2f95d.jpg?1783920953",
+    "large": "https://cards.scryfall.io/large/front/c/9/c9f1fc97-00c0-492b-a4a3-b179afc2f95d.jpg?1783920953"
+   },
+   "layout": "normal"
+  },
+  {
+   "object": "card",
+   "id": "28e11b59-c677-4235-a377-18921c5131f0",
+   "name": "Abby, Merciless Soldier",
+   "set_name": "Secret Lair Drop",
+   "rarity": "mythic",
+   "image_uris": {
+    "small": "https://cards.scryfall.io/small/front/2/8/28e11b59-c677-4235-a377-18921c5131f0.jpg?1783905138",
+    "normal": "https://cards.scryfall.io/normal/front/2/8/28e11b59-c677-4235-a377-18921c5131f0.jpg?1783905138",
+    "large": "https://cards.scryfall.io/large/front/2/8/28e11b59-c677-4235-a377-18921c5131f0.jpg?1783905138"
+   },
+   "layout": "normal"
+  },
+  {
+   "object": "card",
+   "id": "d2705b43-a94a-44c0-8740-82e0b296820c",
+   "name": "Abhorrent Oculus",
+   "set_name": "Duskmourn: House of Horror",
+   "rarity": "mythic",
+   "image_uris": {
+    "small": "https://cards.scryfall.io/small/front/d/2/d2705b43-a94a-44c0-8740-82e0b296820c.jpg?1783909500",
+    "normal": "https://cards.scryfall.io/normal/front/d/2/d2705b43-a94a-44c0-8740-82e0b296820c.jpg?1783909500",
+    "large": "https://cards.scryfall.io/large/front/d/2/d2705b43-a94a-44c0-8740-82e0b296820c.jpg?1783909500"
+   },
+   "layout": "normal"
+  },
+  {
+   "object": "card",
+   "id": "627c392c-4d18-4eb2-a4e8-c668f61f5487",
+   "name": "Aclazotz, Deepest Betrayal // Temple of the Dead",
+   "set_name": "The Lost Caverns of Ixalan",
+   "rarity": "mythic",
+   "card_faces": [
+    {
+     "name": "Aclazotz, Deepest Betrayal",
+     "image_uris": {
+      "small": "https://cards.scryfall.io/small/front/6/2/627c392c-4d18-4eb2-a4e8-c668f61f5487.jpg?1783913789",
+      "normal": "https://cards.scryfall.io/normal/front/6/2/627c392c-4d18-4eb2-a4e8-c668f61f5487.jpg?1783913789",
+      "large": "https://cards.scryfall.io/large/front/6/2/627c392c-4d18-4eb2-a4e8-c668f61f5487.jpg?1783913789",
+      "png": "https://cards.scryfall.io/png/front/6/2/627c392c-4d18-4eb2-a4e8-c668f61f5487.png?1783913789",
+      "art_crop": "https://cards.scryfall.io/art_crop/front/6/2/627c392c-4d18-4eb2-a4e8-c668f61f5487.jpg?1783913789",
+      "border_crop": "https://cards.scryfall.io/border_crop/front/6/2/627c392c-4d18-4eb2-a4e8-c668f61f5487.jpg?1783913789",
+      "thumb": "https://cards.scryfall.io/thumb/front/6/2/627c392c-4d18-4eb2-a4e8-c668f61f5487.webp?1783913789",
+      "grid": "https://cards.scryfall.io/grid/front/6/2/627c392c-4d18-4eb2-a4e8-c668f61f5487.webp?1783913789",
+      "display": "https://cards.scryfall.io/display/front/6/2/627c392c-4d18-4eb2-a4e8-c668f61f5487.webp?1783913789",
+      "art": "https://cards.scryfall.io/art/front/6/2/627c392c-4d18-4eb2-a4e8-c668f61f5487.webp?1783913789",
+      "crop": "https://cards.scryfall.io/crop/front/6/2/627c392c-4d18-4eb2-a4e8-c668f61f5487.webp?1783913789",
+      "jpeg": "https://cards.scryfall.io/normal/front/6/2/627c392c-4d18-4eb2-a4e8-c668f61f5487.jpg?1783913789"
+     }
+    },
+    {
+     "name": "Temple of the Dead",
+     "image_uris": {
+      "small": "https://cards.scryfall.io/small/back/6/2/627c392c-4d18-4eb2-a4e8-c668f61f5487.jpg?1783913789",
+      "normal": "https://cards.scryfall.io/normal/back/6/2/627c392c-4d18-4eb2-a4e8-c668f61f5487.jpg?1783913789",
+      "large": "https://cards.scryfall.io/large/back/6/2/627c392c-4d18-4eb2-a4e8-c668f61f5487.jpg?1783913789",
+      "png": "https://cards.scryfall.io/png/back/6/2/627c392c-4d18-4eb2-a4e8-c668f61f5487.png?1783913789",
+      "art_crop": "https://cards.scryfall.io/art_crop/back/6/2/627c392c-4d18-4eb2-a4e8-c668f61f5487.jpg?1783913789",
+      "border_crop": "https://cards.scryfall.io/border_crop/back/6/2/627c392c-4d18-4eb2-a4e8-c668f61f5487.jpg?1783913789",
+      "thumb": "https://cards.scryfall.io/thumb/back/6/2/627c392c-4d18-4eb2-a4e8-c668f61f5487.webp?1783913789",
+      "grid": "https://cards.scryfall.io/grid/back/6/2/627c392c-4d18-4eb2-a4e8-c668f61f5487.webp?1783913789",
+      "display": "https://cards.scryfall.io/display/back/6/2/627c392c-4d18-4eb2-a4e8-c668f61f5487.webp?1783913789",
+      "art": "https://cards.scryfall.io/art/back/6/2/627c392c-4d18-4eb2-a4e8-c668f61f5487.webp?1783913789",
+      "crop": "https://cards.scryfall.io/crop/back/6/2/627c392c-4d18-4eb2-a4e8-c668f61f5487.webp?1783913789",
+      "jpeg": "https://cards.scryfall.io/normal/back/6/2/627c392c-4d18-4eb2-a4e8-c668f61f5487.jpg?1783913789"
+     }
+    }
+   ],
+   "layout": "transform"
+  },
+  {
+   "object": "card",
+   "id": "no-image",
+   "name": "No Image",
+   "set_name": "Avatar: The Last Airbender Eternal",
+   "rarity": "mythic",
+   "layout": "normal"
+  }
+ ]
+}

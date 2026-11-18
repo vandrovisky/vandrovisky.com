@@ -1,0 +1,262 @@
+[
+ {
+  "id": "dp5-97",
+  "game": "pokemon",
+  "name": "Garchomp",
+  "set": "dp5",
+  "imageUrl": "https://assets.tcgdex.net/en/dp/dp5/97/high.webp",
+  "image": "/cards/pokemon-dp5-97.webp"
+ },
+ {
+  "id": "dp5-7",
+  "game": "pokemon",
+  "name": "Leafeon",
+  "set": "dp5",
+  "imageUrl": "https://assets.tcgdex.net/en/dp/dp5/7/high.webp",
+  "image": "/cards/pokemon-dp5-7.webp"
+ },
+ {
+  "id": "dp1-13",
+  "game": "pokemon",
+  "name": "Roserade",
+  "set": "dp1",
+  "imageUrl": "https://assets.tcgdex.net/en/dp/dp1/13/high.webp",
+  "image": "/cards/pokemon-dp1-13.webp"
+ },
+ {
+  "id": "dp7-10",
+  "game": "pokemon",
+  "name": "Sceptile",
+  "set": "dp7",
+  "imageUrl": "https://assets.tcgdex.net/en/dp/dp7/10/high.webp",
+  "image": "/cards/pokemon-dp7-10.webp"
+ },
+ {
+  "id": "dp6-6",
+  "game": "pokemon",
+  "name": "Heatran",
+  "set": "dp6",
+  "imageUrl": "https://assets.tcgdex.net/en/dp/dp6/6/high.webp",
+  "image": "/cards/pokemon-dp6-6.webp"
+ },
+ {
+  "id": "dp1-121",
+  "game": "pokemon",
+  "name": "Infernape",
+  "set": "dp1",
+  "imageUrl": "https://assets.tcgdex.net/en/dp/dp1/121/high.webp",
+  "image": "/cards/pokemon-dp1-121.webp"
+ },
+ {
+  "id": "dp1-9",
+  "game": "pokemon",
+  "name": "Manaphy",
+  "set": "dp1",
+  "imageUrl": "https://assets.tcgdex.net/en/dp/dp1/9/high.webp",
+  "image": "/cards/pokemon-dp1-9.webp"
+ },
+ {
+  "id": "dp3-17",
+  "game": "pokemon",
+  "name": "Roserade",
+  "set": "dp3",
+  "imageUrl": "https://assets.tcgdex.net/en/dp/dp3/17/high.webp",
+  "image": "/cards/pokemon-dp3-17.webp"
+ },
+ {
+  "id": "dp3-16",
+  "game": "pokemon",
+  "name": "Raikou",
+  "set": "dp3",
+  "imageUrl": "https://assets.tcgdex.net/en/dp/dp3/16/high.webp",
+  "image": "/cards/pokemon-dp3-16.webp"
+ },
+ {
+  "id": "dp3-19",
+  "game": "pokemon",
+  "name": "Suicune",
+  "set": "dp3",
+  "imageUrl": "https://assets.tcgdex.net/en/dp/dp3/19/high.webp",
+  "image": "/cards/pokemon-dp3-19.webp"
+ },
+ {
+  "id": "de7a150b-1b0d-4928-a2cc-80a4b7412350",
+  "game": "magic",
+  "name": "Aang, Airbending Master",
+  "set": "Avatar: The Last Airbender Eternal",
+  "rarity": "mythic",
+  "imageUrl": "https://cards.scryfall.io/large/front/d/e/de7a150b-1b0d-4928-a2cc-80a4b7412350.jpg?1783904837",
+  "image": "/cards/magic-de7a150b-1b0d-4928-a2cc-80a4b7412350.webp"
+ },
+ {
+  "id": "c9f1fc97-00c0-492b-a4a3-b179afc2f95d",
+  "game": "magic",
+  "name": "Abaddon the Despoiler",
+  "set": "Warhammer 40,000 Commander",
+  "rarity": "mythic",
+  "imageUrl": "https://cards.scryfall.io/large/front/c/9/c9f1fc97-00c0-492b-a4a3-b179afc2f95d.jpg?1783920953",
+  "image": "/cards/magic-c9f1fc97-00c0-492b-a4a3-b179afc2f95d.webp"
+ },
+ {
+  "id": "28e11b59-c677-4235-a377-18921c5131f0",
+  "game": "magic",
+  "name": "Abby, Merciless Soldier",
+  "set": "Secret Lair Drop",
+  "rarity": "mythic",
+  "imageUrl": "https://cards.scryfall.io/large/front/2/8/28e11b59-c677-4235-a377-18921c5131f0.jpg?1783905138",
+  "image": "/cards/magic-28e11b59-c677-4235-a377-18921c5131f0.webp"
+ },
+ {
+  "id": "d2705b43-a94a-44c0-8740-82e0b296820c",
+  "game": "magic",
+  "name": "Abhorrent Oculus",
+  "set": "Duskmourn: House of Horror",
+  "rarity": "mythic",
+  "imageUrl": "https://cards.scryfall.io/large/front/d/2/d2705b43-a94a-44c0-8740-82e0b296820c.jpg?1783909500",
+  "image": "/cards/magic-d2705b43-a94a-44c0-8740-82e0b296820c.webp"
+ },
+ {
+  "id": "aa192912-c9ee-403f-8a46-a338c9edb4b9",
+  "game": "magic",
+  "name": "Absolute Virtue",
+  "set": "Final Fantasy",
+  "rarity": "mythic",
+  "imageUrl": "https://cards.scryfall.io/large/front/a/a/aa192912-c9ee-403f-8a46-a338c9edb4b9.jpg?1783906576",
+  "image": "/cards/magic-aa192912-c9ee-403f-8a46-a338c9edb4b9.webp"
+ },
+ {
+  "id": "5079439a-9acc-4460-bf75-f33400a318d3",
+  "game": "magic",
+  "name": "Abyssal Lotus",
+  "set": "Nauctis: The Sunken Realm",
+  "rarity": "mythic",
+  "imageUrl": "https://cards.scryfall.io/large/front/5/0/5079439a-9acc-4460-bf75-f33400a318d3.jpg?1794579736",
+  "image": "/cards/magic-5079439a-9acc-4460-bf75-f33400a318d3.webp"
+ },
+ {
+  "id": "aee68b52-6377-419b-b772-2af1e57cbe5d",
+  "game": "magic",
+  "name": "Abyssal Persecutor",
+  "set": "Worldwake",
+  "rarity": "mythic",
+  "imageUrl": "https://cards.scryfall.io/large/front/a/e/aee68b52-6377-419b-b772-2af1e57cbe5d.jpg?1783942058",
+  "image": "/cards/magic-aee68b52-6377-419b-b772-2af1e57cbe5d.webp"
+ },
+ {
+  "id": "dd52d0bd-3abd-401c-9f56-ee911613da3b",
+  "game": "magic",
+  "name": "Acererak the Archlich",
+  "set": "Adventures in the Forgotten Realms",
+  "rarity": "mythic",
+  "imageUrl": "https://cards.scryfall.io/large/front/d/d/dd52d0bd-3abd-401c-9f56-ee911613da3b.jpg?1783926501",
+  "image": "/cards/magic-dd52d0bd-3abd-401c-9f56-ee911613da3b.webp"
+ },
+ {
+  "id": "627c392c-4d18-4eb2-a4e8-c668f61f5487",
+  "game": "magic",
+  "name": "Aclazotz, Deepest Betrayal // Temple of the Dead",
+  "set": "The Lost Caverns of Ixalan",
+  "rarity": "mythic",
+  "imageUrl": "https://cards.scryfall.io/large/front/6/2/627c392c-4d18-4eb2-a4e8-c668f61f5487.jpg?1783913789",
+  "image": "/cards/magic-627c392c-4d18-4eb2-a4e8-c668f61f5487.webp"
+ },
+ {
+  "id": "c634273a-94b0-4104-9d10-ae522ece1fc7",
+  "game": "magic",
+  "name": "Adagia, Windswept Bastion",
+  "set": "Edge of Eternities",
+  "rarity": "mythic",
+  "imageUrl": "https://cards.scryfall.io/large/front/c/6/c634273a-94b0-4104-9d10-ae522ece1fc7.jpg?1783905918",
+  "image": "/cards/magic-c634273a-94b0-4104-9d10-ae522ece1fc7.webp"
+ },
+ {
+  "id": "OP06-106_p1",
+  "game": "onepiece",
+  "name": "Kouzuki Hiyori (Alternate Art)",
+  "set": "Wings of the Captain",
+  "rarity": "SR",
+  "imageUrl": "https://optcgapi.com/media/static/Card_Images/OP06-106_p1.jpg",
+  "image": "/cards/onepiece-OP06-106_p1.webp"
+ },
+ {
+  "id": "EB02-045",
+  "game": "onepiece",
+  "name": "Trafalgar Law",
+  "set": "Extra Booster: Anime 25th Collection",
+  "rarity": "SR",
+  "imageUrl": "https://optcgapi.com/media/static/Card_Images/EB02-045.jpg",
+  "image": "/cards/onepiece-EB02-045.webp"
+ },
+ {
+  "id": "OP03-113_r1",
+  "game": "onepiece",
+  "name": "Charlotte Perospero (Reprint)",
+  "set": "Premium Booster -The Best-",
+  "rarity": "SR",
+  "imageUrl": "https://optcgapi.com/media/static/Card_Images/OP03-113_r1.jpg",
+  "image": "/cards/onepiece-OP03-113_r1.webp"
+ },
+ {
+  "id": "EB01-022_p1",
+  "game": "onepiece",
+  "name": "Inazuma (Alternate Art)",
+  "set": "Extra Booster: Memorial Collection",
+  "rarity": "SR",
+  "imageUrl": "https://optcgapi.com/media/static/Card_Images/EB01-022_p1.jpg",
+  "image": "/cards/onepiece-EB01-022_p1.webp"
+ },
+ {
+  "id": "OP13-064_p1",
+  "game": "onepiece",
+  "name": "Gol.D.Roger (064) (Alternate Art)",
+  "set": "Carrying On His Will",
+  "rarity": "SR",
+  "imageUrl": "https://optcgapi.com/media/static/Card_Images/OP13-064_p1_vix6oRm.jpg",
+  "image": "/cards/onepiece-OP13-064_p1.webp"
+ },
+ {
+  "id": "OP08-106_p2",
+  "game": "onepiece",
+  "name": "Nami (SP)",
+  "set": "Emperors in the New World",
+  "rarity": "SR",
+  "imageUrl": "https://optcgapi.com/media/static/Card_Images/OP08-106_p2.jpg",
+  "image": "/cards/onepiece-OP08-106_p2.webp"
+ },
+ {
+  "id": "EB01-012_r1",
+  "game": "onepiece",
+  "name": "Cavendish - EB01-012 (Reprint)",
+  "set": "Premium Booster -The Best- Vol. 2",
+  "rarity": "SR",
+  "imageUrl": "https://optcgapi.com/media/static/Card_Images/EB01-012_r1.jpg",
+  "image": "/cards/onepiece-EB01-012_r1.webp"
+ },
+ {
+  "id": "EB01-046",
+  "game": "onepiece",
+  "name": "Brook (046)",
+  "set": "Extra Booster: Memorial Collection",
+  "rarity": "SR",
+  "imageUrl": "https://optcgapi.com/media/static/Card_Images/EB01-046.jpg",
+  "image": "/cards/onepiece-EB01-046.webp"
+ },
+ {
+  "id": "OP04-044_p2",
+  "game": "onepiece",
+  "name": "Kaido (044) (SP)",
+  "set": "Awakening of the New Era",
+  "rarity": "SR",
+  "imageUrl": "https://optcgapi.com/media/static/Card_Images/OP04-044_p2.jpg",
+  "image": "/cards/onepiece-OP04-044_p2.webp"
+ },
+ {
+  "id": "OP06-007_p6",
+  "game": "onepiece",
+  "name": "Shanks (SP)",
+  "set": "Premium Booster -The Best- Vol. 2",
+  "rarity": "SR",
+  "imageUrl": "https://optcgapi.com/media/static/Card_Images/OP06-007_p6.jpg",
+  "image": "/cards/onepiece-OP06-007_p6.webp"
+ }
+]

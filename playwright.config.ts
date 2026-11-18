@@ -12,5 +12,7 @@ export default defineConfig({
     url: 'http://localhost:4321',
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
+    // e2e runs against the committed seed pool: fast, deterministic, no API calls.
+    env: { CARDS_OFFLINE: '1' },
   },
 });
