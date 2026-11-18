@@ -17,7 +17,7 @@ const links = [
 
 <Base lang={lang} title={copy.title} description={copy.desc}>
   <div class="contact">
-    <h1 data-reveal="words">{copy.h1}</h1>
+    <h1 data-cursor-anchor data-reveal="words">{copy.h1}</h1>
     <p class="contact__lead" data-reveal>{copy.lead}</p>
     <ul class="contact__links" data-reveal>
       {links.map((l) => <li><span>{l.label}</span><a href={l.href}>{l.text}</a></li>)}

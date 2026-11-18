@@ -1,0 +1,39 @@
+---
+/* Provisional look: a plain dot. Plan 2 swaps the body for the character SVG. */
+---
+
+<div class="cursor" aria-hidden="true" data-shape="dot">
+  <div class="cursor__body"><slot /></div>
+</div>
+
+<script>
+  import { initCursor } from '../scripts/motion/cursor';
+  initCursor();
+</script>
+
+<style is:global>
+  .cursor { display: none; }
+
+  html[data-cursor] .cursor {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    pointer-events: none;
+    will-change: transform;
+  }
+  .cursor__body {
+    background: var(--color-accent);
+    transition: background-color .2s, opacity .2s;
+  }
+  .cursor[data-shape='ring'] .cursor__body {
+    background: transparent;
+    border: 2px solid var(--color-accent);
+  }
+  .cursor[data-over-field] { opacity: 0; }
+
+  /* Hide the native arrow only where the custom one stands in for it. */
+  html[data-cursor], html[data-cursor] a, html[data-cursor] button { cursor: none; }
+  html[data-cursor] :is(input, textarea, select, [contenteditable]) { cursor: auto; }
+</style>

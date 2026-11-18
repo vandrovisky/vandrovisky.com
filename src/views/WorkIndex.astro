@@ -14,7 +14,7 @@ const copy = {
 ---
 
 <Base lang={lang} title={copy.title} description={copy.desc}>
-  <h1 class="page-title" data-reveal="words">{copy.h1}</h1>
+  <h1 data-cursor-anchor class="page-title" data-reveal="words">{copy.h1}</h1>
   <div class="case-grid">
     {cases.map((entry) => <CaseCard entry={entry} />)}
   </div>
