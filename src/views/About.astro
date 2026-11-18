@@ -1,0 +1,126 @@
+---
+import Base from '../layouts/Base.astro';
+import type { Lang } from '../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+
+const stack = {
+  Backend: ['PHP', 'Laravel', 'Livewire', 'Python', 'FastAPI', 'Django', 'Node.js'],
+  Frontend: ['JavaScript', 'TypeScript', 'Vue.js', 'React'],
+  Data: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis'],
+  DevOps: ['Docker', 'Docker Swarm', 'AWS (EC2, RDS, S3)', 'CI/CD', 'Nginx', 'Linux'],
+  Messaging: ['RabbitMQ', 'Kafka', 'Chatwoot'],
+};
+
+const copy = {
+  en: {
+    title: 'About — Eric Robertson',
+    desc: 'Career, stack, languages, education and certifications of Eric Robertson, full-stack developer.',
+    h1: 'About',
+    intro: 'Full-stack developer with a strong backend focus (Laravel and Python), Docker and AWS. I started in IT support, grew into development at JMV Technology and today lead a PHP-to-Laravel migration at Prontomed.',
+    career: 'Career',
+    jobs: [
+      { when: 'Aug 2026 — now', what: 'Full-stack Developer', where: 'Prontomed Planos de Saúde' },
+      { when: 'Dec 2025 — Jul 2026', what: 'Full-stack Developer (Mid-level)', where: 'JMV Technology' },
+      { when: 'Feb 2023 — Dec 2025', what: 'Full-stack Developer (Junior)', where: 'JMV Technology' },
+      { when: 'Feb 2020 — Feb 2023', what: 'IT Support Specialist', where: 'JMV Technology' },
+    ],
+    stack: 'Stack',
+    edu: 'Education',
+    eduText: 'B.Sc. in Computer Engineering — UEMG, Divinópolis (2018–2025)',
+    langs: 'Languages',
+    langsText: 'Portuguese (native) · English (upper-intermediate, B2)',
+    certs: 'Certifications',
+    certsId: 'certifications',
+  },
+  pt: {
+    title: 'Sobre — Eric Robertson',
+    desc: 'Trajetória, stack, idiomas, formação e certificações de Eric Robertson, desenvolvedor fullstack.',
+    h1: 'Sobre',
+    intro: 'Desenvolvedor fullstack com forte foco em backend (Laravel e Python), Docker e AWS. Comecei no suporte de TI, cresci para o desenvolvimento na JMV Technology e hoje conduzo uma migração de PHP puro para Laravel na Prontomed.',
+    career: 'Trajetória',
+    jobs: [
+      { when: 'Ago 2026 — hoje', what: 'Desenvolvedor Fullstack', where: 'Prontomed Planos de Saúde' },
+      { when: 'Dez 2025 — Jul 2026', what: 'Desenvolvedor Fullstack Pleno', where: 'JMV Technology' },
+      { when: 'Fev 2023 — Dez 2025', what: 'Desenvolvedor Fullstack Júnior', where: 'JMV Technology' },
+      { when: 'Fev 2020 — Fev 2023', what: 'Especialista em Suporte de TI', where: 'JMV Technology' },
+    ],
+    stack: 'Stack',
+    edu: 'Formação',
+    eduText: 'Bacharelado em Engenharia da Computação — UEMG, Divinópolis (2018–2025)',
+    langs: 'Idiomas',
+    langsText: 'Português (nativo) · Inglês (intermediário avançado, B2)',
+    certs: 'Certificações',
+    certsId: 'certificacoes',
+  },
+}[lang];
+
+// TODO(conteúdo): confirm the full certification list with Eric.
+const certs = [
+  { name: 'Claude Code 101, Claude 101, Claude Code in Action', by: 'Anthropic' },
+  { name: lang === 'en' ? 'WhatsApp support bot with Python and PHP' : 'BOT de Atendimento WhatsApp com Python e PHP', by: 'Udemy · 2024' },
+];
+---
+
+<Base lang={lang} title={copy.title} description={copy.desc}>
+  <div class="about">
+    <h1 data-reveal="words">{copy.h1}</h1>
+    <p class="about__intro" data-reveal>{copy.intro}</p>
+
+    <section data-reveal>
+      <h2>{copy.career}</h2>
+      <ol class="timeline">
+        {copy.jobs.map((j) => (
+          <li><span class="timeline__when">{j.when}</span><strong>{j.what}</strong><span>{j.where}</span></li>
+        ))}
+      </ol>
+    </section>
+
+    <section data-reveal>
+      <h2>{copy.stack}</h2>
+      <dl class="stack">
+        {Object.entries(stack).map(([group, items]) => (
+          <div><dt>{group}</dt><dd>{items.join(' · ')}</dd></div>
+        ))}
+      </dl>
+    </section>
+
+    <section data-reveal>
+      <h2>{copy.edu}</h2>
+      <p>{copy.eduText}</p>
+    </section>
+
+    <section data-reveal>
+      <h2>{copy.langs}</h2>
+      <p>{copy.langsText}</p>
+    </section>
+
+    <section id={copy.certsId} data-reveal>
+      <h2>{copy.certs}</h2>
+      <ul class="certs">
+        {certs.map((c) => <li>{c.name} <span>— {c.by}</span></li>)}
+      </ul>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .about { display: grid; gap: var(--space-6); padding-block: var(--space-6); max-width: 900px; }
+  .about h1 { font-size: clamp(2.5rem, 7vw, 5rem); }
+  .about h2 { font-size: 1.5rem; margin-bottom: var(--space-3); }
+  .about__intro { font-size: 1.25rem; max-width: var(--measure); }
+  .timeline { list-style: none; padding: 0; display: grid; gap: var(--space-3); }
+  .timeline li { display: grid; grid-template-columns: 12rem 1fr; gap: 0 var(--space-4); }
+  .timeline li > span:last-child { grid-column: 2; color: var(--color-muted); }
+  .timeline__when { font-family: var(--font-mono); font-size: .85rem; color: var(--color-muted); grid-row: span 2; }
+  .stack { display: grid; gap: var(--space-2); }
+  .stack div { display: grid; grid-template-columns: 8rem 1fr; gap: var(--space-4); }
+  .stack dt { font-family: var(--font-mono); font-size: .85rem; color: var(--color-muted); }
+  .certs { padding-left: 1.1em; }
+  .certs span { color: var(--color-muted); }
+  @media (max-width: 600px) {
+    .timeline li, .stack div { grid-template-columns: 1fr; }
+    .timeline li > span:last-child { grid-column: 1; }
+  }
+</style>

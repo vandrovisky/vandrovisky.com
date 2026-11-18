@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { ROUTES } from '../i18n/paths';
+import { caseSlug, caseSlugsFor, type Case } from '../i18n/content';
+import { t } from '../i18n/ui';
+
+interface Props { entry: Case }
+const { entry } = Astro.props;
+const { title, summary, role, stack, year, builtAt, cover, gallery, lang } = entry.data;
+const { Content } = await render(entry);
+const slugs = await caseSlugsFor(caseSlug(entry));
+const alternates = {
+  en: slugs.en ? `${ROUTES.work.en}${slugs.en}/` : ROUTES.work.en,
+  pt: slugs.pt ? `${ROUTES.work.pt}${slugs.pt}/` : ROUTES.work.pt,
+};
+const labels = lang === 'en'
+  ? { role: 'Role', stack: 'Stack', year: 'Year', back: '← All work' }
+  : { role: 'Papel', stack: 'Stack', year: 'Ano', back: '← Todos os trabalhos' };
+---
+
+<Base lang={lang} title={`${title} — Eric Robertson`} description={summary} alternates={alternates}>
+  <article class="case">
+    <a class="case__back" href={ROUTES.work[lang]}>{labels.back}</a>
+    <h1 data-reveal="words">{title}</h1>
+    <p class="case__summary">{summary}</p>
+    <dl class="case__facts">
+      <div><dt>{labels.role}</dt><dd>{role}</dd></div>
+      {stack.length > 0 && <div><dt>{labels.stack}</dt><dd>{stack.join(', ')}</dd></div>}
+      <div><dt>{labels.year}</dt><dd>{year}</dd></div>
+      {builtAt && <div><dt>{t(lang, 'work.builtAt')}</dt><dd>{builtAt}</dd></div>}
+    </dl>
+    {cover && <Image src={cover} alt={title} class="case__cover" widths={[800, 1600]} sizes="100vw" />}
+    <div class="case__body"><Content /></div>
+    {gallery?.map((img) => <Image src={img} alt="" class="case__shot" widths={[800, 1600]} sizes="100vw" />)}
+  </article>
+</Base>
+
+<style>
+  .case { display: grid; gap: var(--space-5); padding-block: var(--space-6); }
+  .case h1 { font-size: clamp(2.5rem, 7vw, 5rem); }
+  .case__back { color: var(--color-muted); text-decoration: none; }
+  .case__summary { font-size: 1.25rem; max-width: var(--measure); }
+  .case__facts { display: flex; flex-wrap: wrap; gap: var(--space-5); }
+  .case__facts dt { font-family: var(--font-mono); font-size: .75rem; text-transform: uppercase; color: var(--color-muted); }
+  .case__body { max-width: var(--measure); }
+  .case__cover, .case__shot { border-radius: 12px; border: 1px solid var(--color-line); }
+</style>

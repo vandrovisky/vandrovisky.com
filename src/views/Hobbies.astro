@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import type { Lang } from '../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const copy = {
+  en: { title: 'Hobbies — Eric Robertson', desc: 'RPG and trading card games: what Eric Robertson does away from the keyboard.', h1: 'Hobbies', rpg: 'TODO(conteúdo): RPG text.' },
+  pt: { title: 'Hobbies — Eric Robertson', desc: 'RPG e card games: o que Eric Robertson faz longe do teclado.', h1: 'Hobbies', rpg: 'TODO(conteúdo): texto sobre RPG.' },
+}[lang];
+---
+
+<Base lang={lang} title={copy.title} description={copy.desc}>
+  <div class="hobbies">
+    <h1 data-reveal="words">{copy.h1}</h1>
+    <section data-reveal><h2>RPG</h2><p>{copy.rpg}</p></section>
+    <slot />
+  </div>
+</Base>
+
+<style>
+  .hobbies { display: grid; gap: var(--space-6); padding-block: var(--space-6); }
+  .hobbies h1 { font-size: clamp(2.5rem, 7vw, 5rem); }
+</style>

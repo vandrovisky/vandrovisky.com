@@ -1,0 +1,63 @@
+---
+import Base from '../layouts/Base.astro';
+import CaseCard from '../components/CaseCard.astro';
+import { getCases } from '../i18n/content';
+import { ROUTES } from '../i18n/paths';
+import type { Lang } from '../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const featured = (await getCases(lang)).filter((c) => c.data.featured);
+const copy = {
+  en: {
+    title: 'Eric Robertson — Full-stack Developer',
+    desc: 'Full-stack developer focused on backend (Laravel, Python) and DevOps. Portfolio, work and contact.',
+    hello: 'Full-stack developer',
+    lead: 'I build backends that hold up — Laravel, Python, Docker, queues — and the interfaces on top of them.',
+    featured: 'Selected work',
+    all: 'All work →',
+    cta: 'Get in touch',
+  },
+  pt: {
+    title: 'Eric Robertson — Desenvolvedor Fullstack',
+    desc: 'Desenvolvedor fullstack com foco em backend (Laravel, Python) e DevOps. Portfólio, trabalhos e contato.',
+    hello: 'Desenvolvedor fullstack',
+    lead: 'Construo backends que aguentam o tranco — Laravel, Python, Docker, filas — e as interfaces em cima deles.',
+    featured: 'Trabalhos selecionados',
+    all: 'Todos os trabalhos →',
+    cta: 'Fale comigo',
+  },
+}[lang];
+---
+
+<Base lang={lang} title={copy.title} description={copy.desc}>
+  <section class="hero" data-cursor-anchor>
+    <p class="hero__kicker">{copy.hello}</p>
+    <h1 data-reveal="words">Eric Robertson</h1>
+    <p class="hero__lead" data-reveal>{copy.lead}</p>
+    <p data-reveal><a class="hero__cta" href={ROUTES.contact[lang]}>{copy.cta}</a></p>
+  </section>
+
+  <section class="featured">
+    <h2 data-cursor-anchor data-reveal>{copy.featured}</h2>
+    <div class="featured__grid">
+      {featured.map((entry) => <CaseCard entry={entry} />)}
+    </div>
+    <p><a href={ROUTES.work[lang]}>{copy.all}</a></p>
+  </section>
+</Base>
+
+<style>
+  .hero { min-height: 70vh; display: grid; align-content: center; gap: var(--space-4); }
+  .hero h1 { font-size: clamp(3rem, 12vw, 9rem); }
+  .hero__kicker { font-family: var(--font-mono); color: var(--color-accent); }
+  .hero__lead { font-size: clamp(1.15rem, 2.4vw, 1.5rem); max-width: 40ch; }
+  .hero__cta { font-weight: 600; }
+  .featured { display: grid; gap: var(--space-5); }
+  .featured h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+  .featured__grid {
+    display: grid;
+    gap: var(--space-5);
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  }
+</style>
