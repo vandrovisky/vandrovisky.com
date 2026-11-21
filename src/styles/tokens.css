@@ -4,6 +4,8 @@
   --color-ink: #16151a;
   --color-muted: #5d5a66;
   --color-accent: #e8590c;
+  /* accent for small text: darker on light backgrounds to keep 4.5:1 */
+  --color-accent-text: #b34209;
   --color-line: #d9d4c7;
 
   --font-display: 'Space Grotesk', system-ui, sans-serif;
@@ -31,6 +33,7 @@
     --color-ink: #eeeae2;
     --color-muted: #a29fab;
     --color-line: #2c2a33;
+    --color-accent-text: #e8590c;
   }
 }
 
@@ -40,6 +43,7 @@ html[data-mood='alt'] {
   --color-ink: #f4f1ea;
   --color-muted: #a8a4b0;
   --color-line: #34313c;
+  --color-accent-text: #e8590c;
 }
 @media (prefers-color-scheme: dark) {
   html[data-mood='alt'] {
@@ -47,5 +51,6 @@ html[data-mood='alt'] {
     --color-ink: #16151a;
     --color-muted: #55525e;
     --color-line: #d9d4c7;
+    --color-accent-text: #b34209;
   }
 }
